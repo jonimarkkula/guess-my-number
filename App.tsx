@@ -1,4 +1,4 @@
-import { StyleSheet, ImageBackground } from 'react-native';
+import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
@@ -7,7 +7,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import StartGameScreen from './components/screens/StartGameScreen';
 import { Colors } from './constants/Colors';
 import GameScreen from './components/screens/GameScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import GameOverScreen from './components/screens/GameOverScreen';
 
 // Keep the splash screen visible while we fetch resources
