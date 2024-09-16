@@ -10,7 +10,8 @@ import {
 import { Colors } from '../../constants/Colors';
 
 interface PrimaryButtonProps extends PropsWithChildren {
-  onPress(): void;
+  onPress(...params: any): void;
+  style?: {};
 }
 
 function PrimaryButton(props: PrimaryButtonProps) {
@@ -27,7 +28,7 @@ function PrimaryButton(props: PrimaryButtonProps) {
         onPress={props.onPress}
         android_ripple={{ color: Colors.PrimaryButton.rippleColor }}
       >
-        <Text style={styles.buttonText}>{props.children}</Text>
+        <Text style={[styles.buttonText, props.style]}>{props.children}</Text>
       </Pressable>
     </View>
   );
