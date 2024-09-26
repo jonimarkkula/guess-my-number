@@ -3,7 +3,7 @@
     "name": "guess-my-number",
     "slug": "guess-my-number",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -25,6 +25,18 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5e925dcb-db09-4be9-87b0-eedc68b5a0c7"
+      }
+    },
+    "owner": "jkdmarkku",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5e925dcb-db09-4be9-87b0-eedc68b5a0c7"
+    }
   }
 }

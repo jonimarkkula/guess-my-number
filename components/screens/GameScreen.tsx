@@ -1,4 +1,11 @@
-import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Alert,
+  Text,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -38,6 +45,7 @@ function GameScreen(this: any, props: GameScreenProps) {
   const [guessRounds, setGuessRounds] = useState([
     { key: Math.random(), value: initialGuess },
   ]);
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === props.userSelectedNumber) {
@@ -82,9 +90,8 @@ function GameScreen(this: any, props: GameScreenProps) {
 
   const guessRoundsListLength = guessRounds.length;
 
-  return (
-    <View style={styles.gameScreenContainer}>
-      <PrimaryTitle>Opponent's Guess</PrimaryTitle>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionText style={styles.instructionText}>
@@ -103,6 +110,33 @@ function GameScreen(this: any, props: GameScreenProps) {
           </View>
         </View>
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.buttonsContainerWide}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
+              <Ionicons name="remove" size={24} color={'white'} />
+            </PrimaryButton>
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
+              <Ionicons name="add" size={24} color={'white'} />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.gameScreenContainer}>
+      <PrimaryTitle>Opponent's Guess</PrimaryTitle>
+      {content}
       <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
@@ -124,6 +158,7 @@ const styles = StyleSheet.create({
   gameScreenContainer: {
     flex: 1,
     padding: 24,
+    alignItems: 'center',
   },
   instructionText: {
     fontSize: 24,
@@ -138,5 +173,9 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
     padding: 16,
+  },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

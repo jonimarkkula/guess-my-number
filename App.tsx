@@ -1,4 +1,10 @@
-import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
@@ -83,28 +89,39 @@ export default function App() {
   }
 
   return (
-    <LinearGradient
-      colors={[
-        Colors.Application.backgroundColor1,
-        Colors.Application.backgroundColor2,
-      ]}
-      style={styles.appContainer}
-    >
-      <ImageBackground
-        source={require('./assets/images/background.png')}
-        resizeMode="cover"
+    <>
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <LinearGradient
+        colors={[
+          Colors.Application.backgroundColor1,
+          Colors.Application.backgroundColor2,
+        ]}
         style={styles.appContainer}
-        imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.appContainer}>
-          {SelectedScreen}
-        </SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require('./assets/images/background.png')}
+          resizeMode="cover"
+          style={styles.appContainer}
+          imageStyle={styles.backgroundImage}
+        >
+          <SafeAreaView style={styles.AndroidSafeArea}>
+            {SelectedScreen}
+          </SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  AndroidSafeArea: {
+    flex: 1,
+    paddingTop: Platform.select({ ios: 0, android: StatusBar.currentHeight }),
+  },
   appContainer: {
     flex: 1,
   },

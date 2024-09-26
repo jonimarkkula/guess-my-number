@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 4,
     borderColor: 'white',
+    maxWidth: '80%',
+    width: 300,
   },
   title: {
     fontFamily: 'open-sans-bold',
